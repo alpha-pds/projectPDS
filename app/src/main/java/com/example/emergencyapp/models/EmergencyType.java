@@ -1,22 +1,23 @@
 package com.example.emergencyapp.models;
 
 import java.time.LocalTime;
+import java.util.UUID;
 
 public class EmergencyType {
-    Integer Id;
+    UUID id;
     String emergencytype;
     LocalTime dateTime;
 
     public EmergencyType() {}
 
-    public EmergencyType(Integer id, String emergencytype, LocalTime dateTime) {
-        Id = id;
+    public EmergencyType(UUID id, String emergencytype, LocalTime dateTime) {
+        this.id = id;
         this.emergencytype = emergencytype;
         this.dateTime = dateTime;
     }
 
-    public void setId(Integer id) {
-        Id = id;
+    public void setid(UUID id) {
+        id = id;
     }
 
     public void setEmergencytype(String emergencytype) {
@@ -27,8 +28,8 @@ public class EmergencyType {
         this.dateTime = dateTime;
     }
 
-    public Integer getId() {
-        return Id;
+    public UUID getid() {
+        return id;
     }
 
     public String getEmergencytype() {
