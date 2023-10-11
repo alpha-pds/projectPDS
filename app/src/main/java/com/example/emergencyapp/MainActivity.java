@@ -18,14 +18,12 @@ import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnHemorragia = (Button) findViewById(R.id.opcionHemorragia);
-
+    Button btnHemorragia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public Connection connectionDB(){
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            cnn = DriverManager.getConnection("jdbc:jtds:sqlserver:// 192.168.1.14; databaseName=EmergencyDB; integratedSecurity=true");
+            cnn = DriverManager.getConnection("jdbc:jtds:sqlserver:// 192.168.0.1; databaseName=EmergencyDB; integratedSecurity=true");
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void askHelpButton(View view){
         setContentView(R.layout.activity_questionary);
+        btnHemorragia = (Button) findViewById(R.id.opcionHemorragia);
     }
 
 
@@ -71,9 +70,12 @@ public class MainActivity extends AppCompatActivity {
     public void clickHemorragia(View view){
         try {
             Statement stm = connectionDB().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT*FROM PERSONAL WHERE EmergencyTypeId= '" + "f47ac10b-58cc-4372-a567-0e02b2c3d479"+"'");
+            ResultSet rs = stm.executeQuery("SELECT * FROM EmergencyType WHERE EmergencyTypeId='12345678-1234-1234-1234-123456789012'");
             if(rs.next()){
-                btnHemorragia.setText(rs.getString(3));
+                btnHemorragia.setText("hola");
+            }
+            else{
+                btnHemorragia.setText("adios");
             }
 
         }catch(Exception e){
