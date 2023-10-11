@@ -28,7 +28,7 @@
         android:src="@drawable/icon_guide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/main_button"
@@ -49,12 +49,12 @@
     <ImageButton
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:background="@color/black10"
         android:src="@drawable/icon_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/black10"
-        />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

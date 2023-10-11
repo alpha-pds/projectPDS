@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
+    ///<Button
         android:id="@+id/finishQuestionaryButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
@@ -47,91 +47,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/opcionConvulsion"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Convulsión"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/opcionEpileptica"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Ataque epileptico"
-        app:layout_constraintTop_toBottomOf="@+id/opcionAmputacion" />
-
-    <Button
-        android:id="@+id/opcionInfarto"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Infarto"
-        app:layout_constraintTop_toBottomOf="@+id/opcionEpileptica"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
         android:id="@+id/opcionHemorragia"
         style="@style/optionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Hemorragia"
-        app:layout_constraintTop_toBottomOf="@+id/opcionInfarto"
-        tools:layout_editor_absoluteX="0dp" />
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/opcionAhogamiento"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Ahogamiento"
-        app:layout_constraintTop_toBottomOf="@+id/opcionHemorragia"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/opcionEstadoDeShock"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Estado de shock"
-        app:layout_constraintTop_toBottomOf="@+id/opcionAhogamiento"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/opcionFractura"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Fractura"
-        app:layout_constraintTop_toBottomOf="@+id/opcionEstadoDeShock"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/opcionQuemadura"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Quemadura"
-        app:layout_constraintTop_toBottomOf="@+id/opcionConvulsion" />
-
-    <Button
-        android:id="@+id/opcionAmputacion"
-        style="@style/optionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Amputación"
-        app:layout_constraintTop_toBottomOf="@+id/opcionQuemadura"
-        tools:layout_editor_absoluteX="4dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

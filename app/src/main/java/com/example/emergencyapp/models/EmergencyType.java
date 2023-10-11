@@ -4,22 +4,19 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 public class EmergencyType {
-<<<<<<< HEAD
+
     int id;
     String title;
     String description;
     String img;
-=======
-    UUID id;
+
+    UUID Id;
     String emergencytype;
     LocalTime dateTime;
->>>>>>> 4591f3e57544f18cbf04a49328d4503a5b5a6851
 
 
-<<<<<<< HEAD
-=======
-    public EmergencyType(UUID id, String emergencytype, LocalTime dateTime) {
-        this.id = id;
+    public EmergencyType(UUID Id, String emergencytype, LocalTime dateTime) {
+        this.Id = Id;
         this.emergencytype = emergencytype;
         this.dateTime = dateTime;
     }
@@ -37,7 +34,7 @@ public class EmergencyType {
     }
 
     public UUID getid() {
-        return id;
+        return Id;
     }
 
     public String getEmergencytype() {
@@ -47,5 +44,5 @@ public class EmergencyType {
     public LocalTime getDateTime() {
         return dateTime;
     }
->>>>>>> 4591f3e57544f18cbf04a49328d4503a5b5a6851
+
 }
