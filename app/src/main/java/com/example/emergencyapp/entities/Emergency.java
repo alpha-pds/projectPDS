@@ -1,4 +1,4 @@
-package com.example.emergencyapp.models;
+package com.example.emergencyapp.entities;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

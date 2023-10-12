@@ -52,8 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:onClick="clickHemorragia"
-        android:text="ss"
+        android:onClick="getTextFromSQL"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
