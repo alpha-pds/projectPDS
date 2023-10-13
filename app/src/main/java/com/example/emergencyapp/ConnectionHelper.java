@@ -15,7 +15,7 @@ public class ConnectionHelper {
     public Connection connectionClass(){
         ip = "192.168.0.10";
         database = "EmergencyDB";
-        port = "1433";
+        port = "50002";
         user = "sa";
         pass = "#Nadieselasabe1";
 
@@ -25,7 +25,7 @@ public class ConnectionHelper {
         String connectionURL;
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            connectionURL = "jdbc:jtds:sqlserver://LOCALHOST:"+port+"/"+ database;
+            connectionURL = "jdbc:jtds:sqlserver://"+ip+":"+port+"/"+ database;
             connection = DriverManager.getConnection(connectionURL, user, pass);
         }
         catch (Exception ex){
