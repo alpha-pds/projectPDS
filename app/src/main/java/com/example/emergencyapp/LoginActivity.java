@@ -1,4 +1,4 @@
-package com.example.registrarse;
+package com.example.emergencyapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,10 +16,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class LoginActivity extends AppCompatActivity {
-
     EditText userLogin, passwordLogin;
     Button loginBtn, registerBtn;
-
     Connection con;
 
     @Override
@@ -28,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         userLogin = (EditText) findViewById(R.id.editName);
-        passwordLogin = (EditText) findViewById(R.id.editEmail);
+        passwordLogin = (EditText) findViewById(R.id.editLastName);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         registerBtn = (Button) findViewById(R.id.registerBtn);
 
@@ -44,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -81,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             else {
                 try {
-                    String sql = "SELECT * FROM Register WHERE name = '" + userLogin.getText() + "' AND password = '" + passwordLogin.getText() + "' ";
+                    String sql = "SELECT * FROM [User] WHERE name = '" + userLogin.getText() + "' AND password = '" + passwordLogin.getText() + "' ";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(sql);
 

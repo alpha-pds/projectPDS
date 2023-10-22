@@ -13,7 +13,7 @@ public class ConnectionHelper {
     String user, pass, ip, port, database;
     @SuppressLint("NewApi")
     public Connection connectionClass(){
-        ip = "192.168.0.10";
+        ip = "192.168.0.14";
         database = "EmergencyDB";
         port = "50002";
         user = "sa";

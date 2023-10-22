@@ -37,10 +37,10 @@
 
     <ImageView
         android:id="@+id/imgAccount"
-        android:layout_width="193dp"
-        android:layout_height="103dp"
+        android:layout_width="167dp"
+        android:layout_height="85dp"
         android:layout_gravity="center"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -49,12 +49,14 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_height="350dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.608"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintVertical_bias="0.614">
 
         <TextView
             android:id="@+id/txtUsuario"
@@ -82,10 +84,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtEmail"
+            android:id="@+id/txtLastName"
             android:layout_width="225dp"
             android:layout_height="wrap_content"
-            android:text="Correo electrónico"
+            android:text="Primer apellido"
             android:textColor="#090000"
             android:textSize="24dp"
             android:translationX="8dp"
@@ -95,7 +97,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editEmail"
+            android:id="@+id/editLastName"
             android:layout_width="382dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -107,10 +109,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtContraseña3"
+            android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contraseña"
+            android:text="Correo Electrónico"
             android:textColor="#090000"
             android:textSize="24dp"
             android:translationX="8dp"
@@ -120,7 +122,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editPassword2"
+            android:id="@+id/editEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -130,6 +132,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contraseña"
+            android:textColor="#090000"
+            android:textSize="24dp"
+            android:translationX="8dp" />
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:translationX="8dp" />
     </LinearLayout>
 
     <Button
@@ -163,7 +182,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgAccount"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.103" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

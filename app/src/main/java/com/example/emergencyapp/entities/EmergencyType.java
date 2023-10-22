@@ -4,45 +4,40 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 public class EmergencyType {
+    private int id;
+    private String title;
+    private String description = null;
+    private String imgUrl = null;
 
-    int id;
-    String title;
-    String description;
-    String img;
-
-    UUID Id;
-    String emergencytype;
-    LocalTime dateTime;
-
-
-    public EmergencyType(UUID Id, String emergencytype, LocalTime dateTime) {
-        this.Id = Id;
-        this.emergencytype = emergencytype;
-        this.dateTime = dateTime;
+    public int getId() {
+        return id;
     }
 
-    public void setid(UUID id) {
-        id = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEmergencytype(String emergencytype) {
-        this.emergencytype = emergencytype;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDateTime(LocalTime dateTime) {
-        this.dateTime = dateTime;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public UUID getid() {
-        return Id;
+    public String getDescription() {
+        return description;
     }
 
-    public String getEmergencytype() {
-        return emergencytype;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public LocalTime getDateTime() {
-        return dateTime;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 }
