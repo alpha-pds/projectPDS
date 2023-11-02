@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewTitle.setText(item.getTitle());
                 textViewTitle.setTextColor(getResources().getColor(R.color.black10));
                 if(item.getDescription() != null){
-                    textViewTitle.setText(item.getDescription());
+                    textViewDescription.setText(item.getDescription());
                 }
                 if(item.getImgUrl() != null){
 
