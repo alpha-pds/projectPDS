@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewTitle.setText(item.getTitle());
                 textViewTitle.setTextColor(getResources().getColor(R.color.black10));
                 if(item.getDescription() != null){
-                    textViewTitle.setText(item.getDescription());
+                    textViewDescription.setText(item.getDescription());
                 }
                 if(item.getImgUrl() != null){
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 ));
                 button.setId(item.getId()+100);
                 button.setVisibility(View.GONE);
-
+                textViewDescription.setVisibility(View.GONE);
                 button.setText("Continuar");
                 innerLinearLayout.addView(textViewTitle);
                 innerLinearLayout.addView(textViewDescription);
@@ -150,10 +150,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view){
                     expand(v, btn, linearLayout);
                 }
+
             });
         }
         actionExecuted = true;
-    }
-
-
+    }   
 }
