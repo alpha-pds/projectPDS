@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     textViewDescription.setText(item.getDescription());
                 }
                 if(item.getImgUrl() != null){
+                        
 
                 }
                 button.setLayoutParams(new LinearLayout.LayoutParams(
@@ -130,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
                 ));
                 button.setId(item.getId()+100);
                 button.setVisibility(View.GONE);
+                imageView.setId(item.getId()+300);
+                imageView.setVisibility(View.GONE);
+                textViewDescription.setId(item.getId()+400);
+                textViewDescription.setVisibility(View.GONE);
+                textViewTitle.setId(item.getId()+500);
 
                 button.setText("Continuar");
                 innerLinearLayout.addView(textViewTitle);
@@ -138,17 +144,23 @@ public class MainActivity extends AppCompatActivity {
                 innerLinearLayout.addView(button);
                 card.addView(innerLinearLayout);
                 parentLinearLayout.addView(card);
+
             }
         }
         for(int id = 1; id<=emergencyTypeList.size(); id++ ) {
             LinearLayout linearLayout = (LinearLayout) findViewById(id);
             CardView cardView = (CardView) findViewById(id+200);
             Button btn = (Button) findViewById(id+100);
+            ImageView imgView = (ImageView) findViewById(id+300);
+            TextView txtView = (TextView) findViewById(id+400);
+
             ((LinearLayout.LayoutParams) cardView.getLayoutParams()).setMargins(0, 50, 0, 0);
             cardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
                     expand(v, btn, linearLayout);
+                    expand(v, imgView, linearLayout);
+                    expand(v, txtView, linearLayout);
                 }
             });
         }
