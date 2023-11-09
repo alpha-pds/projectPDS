@@ -13,11 +13,11 @@ public class ConnectionHelper {
     String user, pass, ip, port, database;
     @SuppressLint("NewApi")
     public Connection connectionClass(){
-        ip = "172.20.10.3";
+        ip = "10.164.5.61";
         database = "EmergencyDB";
         port = "50002";
         user = "sa";
-        pass = "Copit0*15";
+        pass = "#Nadieselasabe1";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

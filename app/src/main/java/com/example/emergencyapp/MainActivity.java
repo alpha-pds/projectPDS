@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.emergencyapp.entities.EmergencyType;
+import com.example.emergencyapp.entities.Response;
 
 import org.w3c.dom.Text;
 
@@ -28,8 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Connection connect;
     String ConnectionResult = "";
+    final ConnectionHelper connectionHelper = new ConnectionHelper();
+    Connection connect = connectionHelper.connectionClass();
     List<EmergencyType> emergencyTypeList = new ArrayList<>();
     boolean actionExecuted = false;
     @Override
@@ -74,26 +76,33 @@ public class MainActivity extends AppCompatActivity {
     public void getTextFromSQL(View v) {
         LinearLayout parentLinearLayout = findViewById(R.id.optionsContainer);
         System.out.println("Funciona");
-        if(!actionExecuted) {
-            try {
-                ConnectionHelper connectionHelper = new ConnectionHelper();
-                connect = connectionHelper.connectionClass();
-                if (connect != null) {
-                    String query = "SELECT * FROM EmergencyType ";
-                    Statement st = connect.createStatement();
-                    ResultSet rs = st.executeQuery(query);
-                    while (rs.next()) {
-                        EmergencyType emergencyType = new EmergencyType();
-                        emergencyType.setId(rs.getInt(1));
-                        emergencyType.setTitle(rs.getString(2));
-                        emergencyType.setDescription(rs.getString(3));
-                        emergencyType.setImgUrl(rs.getString(4));
-                        emergencyTypeList.add(emergencyType);
+        try {
+            if (connect != null) {
+                String query = "SELECT * FROM EmergencyType ";
+                Statement st = connect.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next() && !actionExecuted) {
+                    EmergencyType emergencyType = new EmergencyType();
+                    emergencyType.setId(rs.getInt(1));
+                    String queryResponses = "SELECT * FROM Response INNER JOIN EmergencyT_Response ON Response.responseId = EmergencyT_Response.responseId WHERE EmergencyT_Response.emergencyTypeId="+ rs.getInt(1);
+                    ResultSet rsResponses = connect.createStatement().executeQuery(queryResponses);
+                    while(rsResponses.next()){
+                        Response response = new Response();
+                        response.setId(rsResponses.getInt(1));
+                        response.setPriority(rsResponses.getInt(5));
+                        response.setDescription(rsResponses.getString(3));
+                        response.setTitle(rsResponses.getString(2));
+                        response.setUrlImg(rsResponses.getString(4));
+                        emergencyType.responses.add(response);
                     }
+                    emergencyType.setTitle(rs.getString(2));
+                    emergencyType.setDescription(rs.getString(3));
+                    emergencyType.setImgUrl(rs.getString(4));
+                    emergencyTypeList.add(emergencyType);
                 }
-            } catch (Exception ex) {
-                ConnectionResult = "check connection";
             }
+        } catch (Exception ex) {
+            ConnectionResult = "check connection";
         }
         if(emergencyTypeList != null) {
             for (EmergencyType item : emergencyTypeList) {
@@ -105,16 +114,16 @@ public class MainActivity extends AppCompatActivity {
                 Button button = new Button(this);
                 card.setId(item.getId()+200);
                 card.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT)
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT)
                 );
                 card.setBackgroundResource(R.drawable.card_option);
                 card.setContentPadding(20,20,20,20);
                 innerLinearLayout.setId(item.getId());
                 innerLinearLayout.setOrientation(LinearLayout.VERTICAL);
                 card.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT)
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT)
                 );
                 textViewTitle.setText(item.getTitle());
                 textViewTitle.setTextColor(getResources().getColor(R.color.black10));
@@ -122,12 +131,11 @@ public class MainActivity extends AppCompatActivity {
                     textViewDescription.setText(item.getDescription());
                 }
                 if(item.getImgUrl() != null){
-                        
 
                 }
                 button.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
                 ));
                 button.setId(item.getId()+100);
                 button.setVisibility(View.GONE);
@@ -144,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
                 innerLinearLayout.addView(button);
                 card.addView(innerLinearLayout);
                 parentLinearLayout.addView(card);
-
             }
         }
         for(int id = 1; id<=emergencyTypeList.size(); id++ ) {
@@ -153,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
             Button btn = (Button) findViewById(id+100);
             ImageView imgView = (ImageView) findViewById(id+300);
             TextView txtView = (TextView) findViewById(id+400);
-
             ((LinearLayout.LayoutParams) cardView.getLayoutParams()).setMargins(0, 50, 0, 0);
             cardView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -162,9 +168,39 @@ public class MainActivity extends AppCompatActivity {
                     expand(v, imgView, linearLayout);
                     expand(v, txtView, linearLayout);
                 }
-
+            });
+            int finalId = id-1;
+            btn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    System.out.println(emergencyTypeList.get(finalId).responses.get(0).getTitle());
+                    setContentView(R.layout.activity_response);
+                    getResponse(view, emergencyTypeList.get(finalId), 0);
+                }
             });
         }
         actionExecuted = true;
-    }   
+    }
+    public void getResponse(View v, EmergencyType emergencyType, int  count){
+        if(emergencyType != null){
+            ArrayList<Response> responses = emergencyType.responses;
+            Response response = responses.get(count);
+            TextView textView = findViewById(R.id.textView);
+            textView.setText(response.getTitle());
+            Button btn = findViewById(R.id.btnContinue);
+            int counta = count+1;
+            if(counta != (responses.size()-1)){
+                btn.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        getResponse(view, emergencyType, counta);
+                    }
+                });
+            }
+            else{
+                btn.setVisibility(View.GONE);
+            }
+
+        }
+    }
 }

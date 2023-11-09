@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="12dp"
@@ -18,31 +17,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
-        android:id="@+id/finishQuestionaryButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:backgroundTint="@color/red"
-        android:onClick="finishQuestionaryButton"
-        android:text="Terminar"
-        android:textAllCaps="false"
-        android:textColor="@color/black10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:id="@+id/finishQuestionaryButton"
+    android:layout_width="100dp"
+    android:layout_height="50dp"
+    android:backgroundTint="@color/red"
+    android:onClick="finishQuestionaryButton"
+    android:text="Terminar"
+    android:textAllCaps="false"
+    android:textColor="@color/black10"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/optionsContainer"
         android:layout_width="385dp"
-        android:layout_height="650dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="610dp"
+        android:layout_marginTop="60dp"
         android:gravity="top"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintVertical_bias="0.0">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
@@ -52,6 +52,14 @@
             android:gravity="center"
             android:padding="20dp"
             android:text="¿Cuál es la situación del afectado?"
+            android:textColor="@color/black10" />
+
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="262dp"
+            android:layout_height="60dp"
+            android:background="@color/blue"
+            android:text="Continuar"
             android:textColor="@color/black10" />
     </LinearLayout>
 

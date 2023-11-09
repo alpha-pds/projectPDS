@@ -1,18 +1,21 @@
 package com.example.emergencyapp.entities;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.LocalTime;
 
 public class Emergency {
-    UUID id;
-    UUID emergencyTypeId;
-    LocalDateTime creationDateTime;
+    private int id;
+    private int emergencyTypeId;
+    private String reporterName;
+    private String patientName;
+    private String assistantName;
+    public LocalTime creationDateTime;
 
     public Emergency() {
     }
 
-    public Emergency(UUID emergencyTypeId, LocalDateTime creationDateTime) {
-        this.emergencyTypeId = emergencyTypeId;
-        this.creationDateTime = creationDateTime;
+    public Emergency(int emergencyTypeId) {
+        this.emergencyTypeId =  emergencyTypeId;
+        creationDateTime = LocalTime.now();
     }
 }

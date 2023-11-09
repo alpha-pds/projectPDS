@@ -1,21 +1,26 @@
 package com.example.emergencyapp.entities;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.UUID;
-
-public class EmergencyType {
+public class Response {
     private int id;
+    private int priority;
     private String title;
-    private String description = null;
-    private String imgUrl = null;
-    public ArrayList<Response> responses = new ArrayList<>();
+    private String description;
+    private String urlImg;
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public String getTitle() {
@@ -34,11 +39,11 @@ public class EmergencyType {
         this.description = description;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getUrlImg() {
+        return urlImg;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 }
