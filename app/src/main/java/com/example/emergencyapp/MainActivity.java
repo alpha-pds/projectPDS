@@ -12,6 +12,7 @@ import android.transition.TransitionManager;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +25,9 @@ import org.w3c.dom.Text;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,19 +52,50 @@ public class MainActivity extends AppCompatActivity {
     public void finishQuestionaryButton(View view) {
         AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
         alert.setMessage("¿Deseas terminar la ayuda?")
-                .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        setContentView(R.layout.activity_main);
+            .setCancelable(false)
+            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    setContentView(R.layout.activity_main);
+                }
+            })
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+        AlertDialog title = alert.create();
+        title.setTitle("Salida");
+        title.show();
+    }
+    public void sendQuestionaryButton(View view, EmergencyType emergencyType) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+        alert.setMessage("Desea dar información sobre los involucrados")
+            .setCancelable(false)
+            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    setContentView(R.layout.activity_pacient_info);
+                    sendEmergencySQL(view, emergencyType);
+                }
+            })
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    try {
+                        if(connect != null){
+                            String query = "INSERT INTO Emergency ( emergencyTypeId, creationDateTime) VALUES ("+ emergencyType.getId() +",'"+ LocalDateTime.now()+"')";
+                            Statement stmt = connect.createStatement();
+                            stmt.executeUpdate(query);
+                        }
                     }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
+                    catch (SQLException e) {
+                        throw new RuntimeException(e);
                     }
-                });
+                    setContentView(R.layout.activity_main);
+                }
+            });
         AlertDialog title = alert.create();
         title.setTitle("Salida");
         title.show();
@@ -71,6 +105,30 @@ public class MainActivity extends AppCompatActivity {
 
         TransitionManager.beginDelayedTransition(layout, new AutoTransition());
         object.setVisibility(v);
+    }
+
+    public void sendEmergencySQL(View v, EmergencyType emergencyType){
+        Button confirmBtn = findViewById(R.id.sendBtn);
+        confirmBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                EditText affected = findViewById(R.id.editTxtAffected);
+                EditText helper = findViewById(R.id.editTxtHelper);
+                EditText informant = findViewById(R.id.editTxtInformant);
+                try {
+                    if (connect != null) {
+
+                        String query = "INSERT INTO Emergency ( emergencyTypeId, creationDateTime, reporterName, patientName, assistantName) VALUES (" + emergencyType.getId() + ",'" + LocalDateTime.now() + "','" + informant.getText() + "','" + affected.getText() + "','" + helper.getText() + "')";
+                        Statement stmt = connect.createStatement();
+                        stmt.executeUpdate(query);
+                    }
+                }
+                catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                setContentView(R.layout.activity_main);
+            }
+        });
     }
 
     public void getTextFromSQL(View v) {
@@ -118,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT)
                 );
                 card.setBackgroundResource(R.drawable.card_option);
-                card.setContentPadding(20,20,20,20);
+                card.setContentPadding(40,40,40,40);
                 innerLinearLayout.setId(item.getId());
                 innerLinearLayout.setOrientation(LinearLayout.VERTICAL);
                 card.setLayoutParams(new LinearLayout.LayoutParams(
@@ -129,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewTitle.setTextColor(getResources().getColor(R.color.black10));
                 if(item.getDescription() != null){
                     textViewDescription.setText(item.getDescription());
+                    textViewDescription.setTextColor(getResources().getColor(R.color.black10));
                 }
                 if(item.getImgUrl() != null){
 
@@ -186,7 +245,9 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<Response> responses = emergencyType.responses;
             Response response = responses.get(count);
             TextView textView = findViewById(R.id.textView);
+            TextView textView2 = findViewById(R.id.textView2);
             textView.setText(response.getTitle());
+            textView2.setText(response.getDescription());
             Button btn = findViewById(R.id.btnContinue);
             int counta = count+1;
             if(counta != (responses.size()-1)){
@@ -198,7 +259,13 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
             else{
-                btn.setVisibility(View.GONE);
+                btn.setText("Enviar");
+                btn.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        sendQuestionaryButton(view, emergencyType);
+                    }
+                });
             }
 
         }
