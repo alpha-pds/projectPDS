@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -190,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
                     textViewDescription.setTextColor(getResources().getColor(R.color.black10));
                 }
                 if(item.getImgUrl() != null){
-
+                    byte[] bytes = Base64.decode(item.getImgUrl(), Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    imageView.setImageBitmap(bitmap);
                 }
                 button.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
